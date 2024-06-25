@@ -8,6 +8,7 @@ services:
       - "80:80"
     volumes:
       - ./upload:/var/www/html
+      - ./storage:/storage
 
     depends_on:
       - mysql
