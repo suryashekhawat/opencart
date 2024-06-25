@@ -5,7 +5,7 @@ services:
     user: 1000:1000
     restart: always
     ports:
-      - "80:80"
+      - "8088:80"
     volumes:
       - ./upload:/var/www/html
       - ./storage:/storage
@@ -19,6 +19,14 @@ services:
                  touch /var/www/html/install.lock;
                fi &&
                apache2-foreground"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - opencart
 
   mysql:
     image: mysql:5.7
