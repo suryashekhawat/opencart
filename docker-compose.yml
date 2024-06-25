@@ -25,6 +25,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./partystation.in.pem:/etc/ssl/certs/partystation.in.pem
+      - ./partystation.in.key:/etc/ssl/private/partystation.in.key
     depends_on:
       - opencart
 
