@@ -11,6 +11,7 @@ services:
       - ./upload/extension:/var/www/html/extension
       - ./upload/image:/var/www/html/image
       - ./upload/system:/var/www/system
+      - ./upload/install:/var/www/install
       - ./upload/.htaccess.txt:/var/www/html/.htaccess.txt
       - ./upload/config.php:/var/www/html/config.php
       - ./upload/cron.php:/var/www/html/cron.php
