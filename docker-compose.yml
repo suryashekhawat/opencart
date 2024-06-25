@@ -7,20 +7,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./upload/admin:/var/www/html/admin
-      - ./upload/catalog:/var/www/html/catalog
-      - ./upload/extension:/var/www/html/extension
-      - ./upload/image:/var/www/html/image
-      - ./upload/system:/var/www/system
-      - ./upload/install:/var/www/install
-      - ./upload/.htaccess.txt:/var/www/html/.htaccess.txt
-      - ./upload/config.php:/var/www/html/config.php
-      - ./upload/cron.php:/var/www/html/cron.php
-      - ./upload/error.html:/var/www/html/error.html
-      - ./upload/index.php:/var/www/html/index.php
-      - ./upload/install.lock:/var/www/html/install.lock
-      - ./upload/php.ini:/var/www/html/php.ini
-      - ./upload/robots.txt:/var/www/html/robots.txt
+      - ./upload:/var/www/html
 
     depends_on:
       - mysql
