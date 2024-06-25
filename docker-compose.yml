@@ -3,6 +3,7 @@ services:
   opencart:
     build: tools
     user: 1000:1000
+    restart: always
     ports:
       - "80:80"
     volumes:
@@ -35,6 +36,7 @@ services:
     image: mysql:5.7
     ports:
       - "3306:3306"
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=opencart
       - MYSQL_DATABASE=opencart
@@ -45,6 +47,7 @@ services:
     image: adminer:latest
     environment:
       ADMINER_DEFAULT_SERVER: mysql
+    restart: always
     depends_on:
       - mysql
     ports:
@@ -52,9 +55,11 @@ services:
 
   redis:
     image: redis:latest
+    restart: always
 
   memcached:
     image: memcached:latest
+    restart: always
 
 volumes:
   mysql-data:
