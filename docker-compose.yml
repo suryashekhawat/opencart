@@ -6,14 +6,25 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./upload:/var/www/html
+      - ./upload/admin:/var/www/html/admin
+      - ./upload/catalog:/var/www/html/catalog
+      - ./upload/extension:/var/www/html/extension
+      - ./upload/image:/var/www/html/image
+      - ./upload/system:/var/www/system
+      - ./upload/.htaccess.txt:/var/www/html/.htaccess.txt
+      - ./upload/config.php:/var/www/html/config.php
+      - ./upload/cron.php:/var/www/html/cron.php
+      - ./upload/error.html:/var/www/html/error.html
+      - ./upload/index.php:/var/www/html/index.php
+      - ./upload/install.lock:/var/www/html/install.lock
+      - ./upload/php.ini:/var/www/html/php.ini
+      - ./upload/robots.txt:/var/www/html/robots.txt
+
     depends_on:
       - mysql
     command: >
       bash -c "if [ ! -f /var/www/html/install.lock ]; then
                  wait-for-it mysql:3306 -t 60 &&
-                 cp config-dist.php config.php
-                 cp admin/config-dist.php admin/config.php
                  php /var/www/html/install/cli_install.php install --username admin --password admin --email email@example.com --http_server http://partystation.in/ --db_driver mysqli --db_hostname mysql --db_username root --db_password opencart --db_database opencart --db_port 3306 --db_prefix oc_;
                  touch /var/www/html/install.lock;
                fi &&
@@ -26,6 +37,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=opencart
       - MYSQL_DATABASE=opencart
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   adminer:
     image: adminer:latest
@@ -42,3 +55,5 @@ services:
   memcached:
     image: memcached:latest
 
+volumes:
+  mysql-data:
